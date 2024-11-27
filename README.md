@@ -24,13 +24,13 @@ The following tools are required:
 
 1. Install the main script:
 ```bash
-sudo curl -o /usr/local/bin/tmux-sessionizer.sh https://raw.githubusercontent.com/YOUR_USERNAME/tmux-sessionizer/main/tmux-sessionizer.sh
+sudo curl -o /usr/local/bin/tmux-sessionizer.sh https://raw.githubusercontent.com/kyleorman/tmux-sessionizer/main/tmux-sessionizer.sh
 sudo chmod +x /usr/local/bin/tmux-sessionizer.sh
 ```
 
 2. Copy the function definitions to your home directory:
 ```bash
-curl -o ~/.tmux-functions.zsh https://raw.githubusercontent.com/YOUR_USERNAME/tmux-sessionizer/main/.tmux-functions.zsh
+curl -o ~/.tmux-functions.zsh https://raw.githubusercontent.com/kyleorman/tmux-sessionizer/main/.tmux-functions.zsh
 ```
 
 3. Set up the configuration (optional):
@@ -158,4 +158,4 @@ Feel free to submit issues and pull requests to improve the tool.
 
 ## Acknowledgment
 
-This script and setup  was inspired by The Primagen's tmux-sessionizer script
+This script and setup was inspired by The Primeagen's tmux-sessionizer script
