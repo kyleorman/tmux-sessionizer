@@ -15,6 +15,7 @@ A tmux session management tool for fast project switching. It combines fuzzy dir
 - [Installation](#installation)
 - [Configuration](#configuration)
   - [Directory Search Configuration](#directory-search-configuration)
+  - [Environment Variables](#environment-variables)
   - [Session-specific Configuration](#session-specific-configuration)
   - [Shell Integration](#shell-integration)
   - [Tmux Configuration](#tmux-configuration)
@@ -134,6 +135,22 @@ Precedence order:
 3. `~/.config/tmux-sessionizer.conf`
 4. Built-in default directories
 
+### Environment Variables
+
+`tmux-sessionizer.sh` supports runtime overrides via environment variables.
+
+### FZF Height Control
+
+By default, fzf height is automatically determined:
+- **Inside tmux:** 40% height (compact popup style)
+- **Outside tmux:** 100% height (full terminal, ideal for WM hotkeys)
+
+Override with:
+
+```bash
+export TMUX_SESSIONIZER_FZF_HEIGHT="50%"
+```
+
 ### Session-specific Configuration
 
 Create `.tmux-sessionizer` inside a project directory to apply tmux commands when a new session is created for that project.
@@ -184,10 +201,11 @@ bind-key Q run-shell "~/.tmux-functions.zsh force-cleanup"
 
 ### i3 Integration
 
-Add this to your i3 config (also in `examples/i3-config-snippet`):
+Add this to your i3 config (also in `examples/i3-config-snippet`) for fullscreen picker behavior:
 
 ```i3
-bindsym $mod+backslash exec --no-startup-id "alacritty -e zsh -lc 'source ~/.zshrc; /usr/local/bin/tmux-sessionizer.sh; exec zsh'"
+bindsym $mod+backslash exec --no-startup-id "alacritty --class tmux-sessionizer -e zsh -lc 'tmux-sessionizer.sh; exec zsh'"
+for_window [class="tmux-sessionizer"] fullscreen enable
 ```
 
 ### Examples Directory
@@ -198,6 +216,7 @@ Copy-paste-ready examples are available in `examples/`:
 - `examples/tmux-sessionizer.conf.advanced`
 - `examples/.tmux-sessionizer.example`
 - `examples/i3-config-snippet`
+- `examples/wm-hotkeys-guide.md`
 - `examples/tmux.conf.snippet`
 
 ## Usage

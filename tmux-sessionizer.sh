@@ -918,6 +918,7 @@ Environment Variables:
   SEARCH_DIRS                         Colon-separated directory list override
   TMUX_SESSIONIZER_FZF_PREVIEW        Set to 0 to disable fzf preview
   TMUX_SESSIONIZER_FZF_PREVIEW_WINDOW fzf preview layout (default: right:60%:wrap)
+  TMUX_SESSIONIZER_FZF_HEIGHT         Override fzf height (default: auto - 40% in tmux, 100% outside)
   TMUX_SESSIONIZER_TEMPLATES_DIR      Template directory (default: ~/.config/tmux-sessionizer/templates)
 
 Config File:
@@ -1033,10 +1034,23 @@ build_directory_index() {
 # @return EXIT_SUCCESS on normal flow, EXIT_INTERRUPTED on Ctrl-C.
 select_directory() {
 	local -a fzf_args
+	local fzf_height
 	local preview_cmd
 	local fzf_status
 
-	fzf_args=(--height 40% --reverse --border)
+	# Determine fzf height based on context:
+	# - Inside tmux: 40% (popup style)
+	# - Outside tmux: 100% (full terminal)
+	# - Override: TMUX_SESSIONIZER_FZF_HEIGHT
+	if [[ -n "${TMUX_SESSIONIZER_FZF_HEIGHT:-}" ]]; then
+		fzf_height="$TMUX_SESSIONIZER_FZF_HEIGHT"
+	elif [[ -n "${TMUX:-}" ]]; then
+		fzf_height="40%"
+	else
+		fzf_height="100%"
+	fi
+
+	fzf_args=(--height "$fzf_height" --reverse --border)
 
 	if [[ "${TMUX_SESSIONIZER_FZF_PREVIEW:-1}" != "0" ]]; then
 		preview_cmd="bash -c 'selected_dir=\"\$1\"; session_name=\$(basename \"\$selected_dir\" | tr . _ | tr -cd \"[:alnum:]_\"); if [[ -n \"\$session_name\" ]] && tmux has-session -t \"\$session_name\" 2>/dev/null; then tmux list-windows -t \"\$session_name\" 2>/dev/null || printf \"%s\\n\" \"Session exists\"; else printf \"%s\\n\" \"New session\"; fi' _ {}"
