@@ -1,0 +1,4 @@
+# Minimal tmux-sessionizer search roots
+# One directory per line.
+$HOME
+$HOME/projects

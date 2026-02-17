@@ -1,0 +1,10 @@
+# tmux-sessionizer launch binding
+bind-key C-f run-shell "/usr/local/bin/tmux-sessionizer.sh"
+
+# Session lifecycle helpers from ~/.tmux-functions.zsh
+bind-key m run-shell "~/.tmux-functions.zsh toggle"
+bind-key R run-shell "~/.tmux-functions.zsh rename"
+bind-key Q run-shell "~/.tmux-functions.zsh force-cleanup"
+
+# Optional status indicator for temporary vs persistent sessions
+set -g status-right "#{?session_option:@persistent,#[fg=green]persistent,#[fg=yellow]temporary} | %Y-%m-%d %H:%M"

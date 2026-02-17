@@ -1,0 +1,19 @@
+# tmux-sessionizer advanced configuration
+#
+# Rules:
+# - One directory per line.
+# - Empty lines and lines starting with # are ignored.
+# - Environment variables such as $HOME are expanded.
+
+# Primary source-code roots
+$HOME/projects
+$HOME/work
+$HOME/src
+
+# Dotfiles and local tool repos
+$HOME/.config
+$HOME/.local/src
+
+# Client and sandbox trees
+$HOME/clients
+$HOME/sandbox
