@@ -1,0 +1,14 @@
+.opencode/
+
+# Test artifacts
+test/tmp/
+*.log
+
+# Development
+.env
+.envrc
+.direnv/
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,18 @@
+# Example per-project tmux layout.
+# Copy this file to: <project>/.tmux-sessionizer
+
+# Name the first window and build a useful pane layout
+rename-window -t 0 editor
+split-window -h -t 0 -c "#{pane_current_path}"
+split-window -v -t 0.1 -c "#{pane_current_path}"
+select-layout -t 0 tiled
+
+# Add a second window for tools/commands
+new-window -n tools -c "#{pane_current_path}"
+
+# Optional startup commands:
+# send-keys -t editor "nvim ." C-m
+# send-keys -t tools "git status -sb" C-m
+
+# Return to the main window
+select-window -t editor

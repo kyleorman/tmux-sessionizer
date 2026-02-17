@@ -1,0 +1,11 @@
+# Example 1: Full terminal mode (recommended for WM hotkeys)
+# Opens maximized terminal with fzf taking full screen
+bindsym $mod+backslash exec --no-startup-id "alacritty --class tmux-sessionizer -e zsh -lc 'tmux-sessionizer.sh; exec zsh'"
+
+# Make the window fullscreen/maximized
+for_window [class="tmux-sessionizer"] fullscreen enable
+
+# Example 2: Floating popup mode (alternative)
+# Opens smaller centered window
+# bindsym $mod+Shift+backslash exec --no-startup-id "alacritty --class tmux-sessionizer-popup -e zsh -lc 'tmux-sessionizer.sh'"
+# for_window [class="tmux-sessionizer-popup"] floating enable, resize set 800 600, move position center
